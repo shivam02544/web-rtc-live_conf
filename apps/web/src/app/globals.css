@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #4f46e5;
+}
+
+/* ============================================
+   PREMIUM DESIGN SYSTEM - VIDEO CALLING APP
+   ============================================ */
+
+@layer base {
+  /* Typography */
+  :root {
+    /* Premium Color System */
+    /* Semantic Colors */
+    --color-success: 34 197 94;
+    --color-warning: 251 191 36;
+    --color-error: 239 68 68;
+    --color-info: 59 130 246;
+    
+    /* Neutral Palette - Light Mode */
+    --color-bg-primary: 255 255 255;
+    --color-bg-secondary: 246 247 249;
+    --color-bg-tertiary: 241 245 249;
+    --color-bg-elevated: 255 255 255;
+    --color-bg-overlay: 15 23 42;
+    
+    --color-surface-primary: 255 255 255;
+    --color-surface-secondary: 248 250 252;
+    --color-surface-hover: 241 245 249;
+    
+    --color-border-subtle: 241 245 249;
+    --color-border-default: 226 228 232;
+    --color-border-strong: 203 213 225;
+    
+    --color-text-primary: 15 23 42;
+    --color-text-secondary: 71 85 105;
+    --color-text-tertiary: 148 163 184;
+    --color-text-inverse: 248 250 252;
+  }
+
+  /* Dark Mode */
+  [data-theme="dark"] {
+    --color-bg-primary: 2 6 23;
+    --color-bg-secondary: 15 23 42;
+    --color-bg-tertiary: 30 41 59;
+    --color-bg-elevated: 30 41 59;
+    --color-bg-overlay: 2 6 23;
+    
+    --color-surface-primary: 15 23 42;
+    --color-surface-secondary: 30 41 59;
+    --color-surface-hover: 51 65 85;
+    
+    --color-border-subtle: 30 41 59;
+    --color-border-default: 51 65 85;
+    --color-border-strong: 71 85 105;
+    
+    --color-text-primary: 248 250 252;
+    --color-text-secondary: 203 213 225;
+    --color-text-tertiary: 148 163 184;
+    --color-text-inverse: 15 23 42;
+  }
+
+  * {
+    border-color: rgb(var(--color-border-default));
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-primary));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* Opaque surface utility retained for existing component markup. */
+  .glass {
+    background: rgb(var(--color-surface-primary));
+    border: 1px solid rgb(var(--color-border-default));
+  }
+  
+  [data-theme="dark"] .glass {
+    background: rgb(var(--color-surface-primary));
+    border-color: rgb(var(--color-border-default));
+  }
+
+  /* Accent utilities use a solid brand color. */
+  .gradient-premium {
+    background: var(--color-primary-600);
+  }
+
+  .gradient-premium-hover {
+    background: var(--color-primary-700);
+  }
+
+  /* Video Mirror */
+  .mirror {
+    transform: scaleX(-1);
+  }
+
+  /* Animations */
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.95);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(0.95);
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.auth-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  background: rgb(var(--color-bg-secondary));
+}
+
+.auth-theme-control {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1;
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid rgb(var(--color-border-default));
+  border-radius: 0.75rem;
+  background: rgb(var(--color-surface-primary));
+}
+
+.theme-toggle-button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 0;
+  border-radius: 0.5rem;
+  color: rgb(var(--color-text-tertiary));
+  background: transparent;
+  cursor: pointer;
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.theme-toggle-button:hover,
+.theme-toggle-button.theme-toggle-active {
+  color: var(--color-primary-700);
+  background: rgb(var(--color-bg-tertiary));
+}
+
+.animate-pulse-ring { animation: none; }
+
+@media (max-width: 640px) {
+  .auth-page { padding: 4.5rem 1rem 1.5rem; }
+}
+
+.theme-toggle-button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+  /* Scrollbar Styles */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-border-strong));
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-text-tertiary));
+  }
+}
+
+/* Global Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-bg-secondary));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-border-strong));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-text-tertiary));
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in srgb, var(--color-primary-500) 30%, transparent);
+  color: rgb(var(--color-text-primary));
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

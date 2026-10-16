@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  callsInitiated Call[] @relation("Caller")
+  callsReceived  Call[] @relation("Receiver")
+}
+
+model Call {
+  id           String    @id @default(uuid())
+  callerId     String
+  receiverId   String
+  status       String
+  startedAt    DateTime?
+  answeredAt   DateTime?
+  endedAt      DateTime?
+  endedReason  String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  caller   User @relation("Caller", fields: [callerId], references: [id])
+  receiver User @relation("Receiver", fields: [receiverId], references: [id])
+}
